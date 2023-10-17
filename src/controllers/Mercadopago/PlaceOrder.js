@@ -1,4 +1,8 @@
 const mercadopago = require("mercadopago");
+const {
+  sendSuccessEmail,
+  sendFailureEmail,
+} = require("../envioMail/envioMail");
 
 mercadopago.configure({
   access_token:
@@ -19,10 +23,18 @@ async function placeOrder(items) {
       failure: "http://localhost:3001/mp/failure",
       pending: "http://localhost:3001/mp/pending",
     },
-    // auto_return: "approved",
   };
-  console.log(preference);
+  console.log("Preference", preference);
   const response = await mercadopago.preferences.create(preference);
+  console.log("Estado de la respuesta de MercadoPago:", response.status);
+
+  if (response.status === 201) {
+    // Si la compra es exitosa, envía un correo electrónico
+    await sendSuccessEmail();
+  } else if (response.status === 400) {
+    // Si la compra es rechazada, envía un correo electrónico de fallo
+    await sendFailureEmail();
+  }
 
   return response;
 }

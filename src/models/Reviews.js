@@ -4,9 +4,16 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("Reviews", {
-    
+    id:{
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      allowNull: false,
+      unique: true,
+    },
     pushDate: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATEONLY,
+        allowNull: false
     },
     description: {
       type: DataTypes.TEXT,

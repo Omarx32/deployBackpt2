@@ -1,4 +1,4 @@
-const { Users } = require('../../db'); 
+const { Users, UsersGoogle } = require('../../db'); 
 
 const createUser = async (req, res) => {
     try {

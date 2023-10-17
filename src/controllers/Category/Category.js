@@ -1,9 +1,9 @@
-
 const { Category } = require("../../db");
 
 const createCategory = async (req, res) => {
   try {
-    const categoryData = req.body.map(category => category.name); // Obtén solo los nombres de las categorías
+    // const categoryData = req.body.map(category => category.name); // Obtén solo los nombres de las categorías
+    const categoryData = req.body; 
 
     const createdCategories = await Promise.all(
       categoryData.map(async (category) => {
