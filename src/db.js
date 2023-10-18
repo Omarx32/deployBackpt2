@@ -52,14 +52,20 @@ Location.belongsToMany(Property, {
 });
 Property.belongsTo(Location);
 
-Users.hasMany(Reviews);
-Reviews.belongsTo(Users);
-
-UsersGoogle.hasMany(Reviews);
-Reviews.belongsTo(Users);
-
-Property.hasMany(Reviews);
+Property.belongsToMany(Reviews, {
+	through:"Reviews_Property",
+});
 Reviews.belongsTo(Property);
+
+Users.belongsToMany(Reviews, {
+	through:"Reviews_User",
+});
+Reviews.belongsTo(Users);
+
+UsersGoogle.belongsToMany(Reviews, {
+	through:"Reviews_UserGoogle",
+});
+Reviews.belongsTo(UsersGoogle);
 
 Users.hasMany(Property)
 Property.belongsTo(Users)

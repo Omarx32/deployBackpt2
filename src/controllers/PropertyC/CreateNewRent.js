@@ -83,7 +83,7 @@ const {
       await createdProperty.setLocation(loc);
     }
   
-    if (email) {
+    if (email && !password) {
       const userGoogle = await UsersGoogle.findOne({
         where: { email },
       });
@@ -93,9 +93,9 @@ const {
         throw new Error("Esta renta no pertenece a ningún usuario");
       }
     }
-    if (email) {
+    if (email && password) {
       const user = await Users.findOne({
-        where: { email },
+        where: { email, password },
       });
       if (user) {
         await createdProperty.setUser(user);
