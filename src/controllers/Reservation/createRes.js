@@ -1,4 +1,3 @@
-const diacriticless = require("diacriticless");
 const { Property, Reservation, Users, UsersGoogle } = require("../../db");
 
 const createReservation = async (
@@ -18,28 +17,6 @@ const createReservation = async (
   }
 
   const resHome = await Property.findByPk(idHome);
-
-  // const resHomes= await Property.findAll()
-
-  // for(let i = 0; i < resHomes.length; i++){
-  // 	resHomes[i].dataValues.secondName= diacriticless(resHomes[i].dataValues.title)
-  // }
-  // console.log(resHomes);
-  // const nameHome= resHomes.find((resHome)=>{
-  //     if(
-  //       resHome.dataValues.title===home ||
-  //       resHome.dataValues.title.toLowerCase()===home.toLowerCase() ||
-  //       resHome.dataValues.title.toUpperCase()===home.toUpperCase() ||
-  //       resHome.dataValues.secondName===diacriticless(home) ||
-  //       resHome.dataValues.secondName.toLowerCase()===diacriticless(home.toLowerCase()) ||
-  //       resHome.dataValues.secondName.toUpperCase()===diacriticless(home.toUpperCase())
-  //       ){
-  //         return resHome;
-  //     }
-  // })
-
-  // console.log(reservationsHome);
-
   const price = resHome.dataValues.nightPrice;
   const newRes = { month, price, numHuespedes };
 
@@ -95,27 +72,23 @@ const getAllResUser = async (UserEmail) => {
   const user = await Users.findOne({ where: { email: UserEmail } });
   const userGoogle = await UsersGoogle.findOne({ where: { email: UserEmail } });
 
+  console.log(user);
+  // console.log(userGoogle);
+
   const reservationsUser = [];
 
-  // for (let i = 0; i < reservations.length; i++) {
-  //   if (
-  //     reservations[i].dataValues.UserId ||
-  //     reservations[i].dataValues.UsersGoogleId
-  //   ) {
-  //     reservationsUser.push(reservations[i]);
-  //   }
-  // }
-
   for(let i = 0; i < reservations.length; i++){
-    if(!reservations[i].dataValues.UserId || !user){break;}
+    if(!reservations[i].dataValues.UserId || !user){continue;}
     if(reservations[i].dataValues.UserId===user.dataValues.id){
       reservationsUser.push(reservations[i]);
     }
   }
+  console.log(reservationsUser);
 
     if (!reservationsUser.length) {
       for (let i = 0; i < reservations.length; i++) {
-        if(!reservations[i].dataValues.UsersGoogleId || userGoogle){break;}
+        if(!reservations[i].dataValues.UsersGoogleId || !userGoogle){continue;}
+        console.log(userGoogle);
         if (reservations[i].dataValues.UsersGoogleId === userGoogle.dataValues.id) {
           reservationsUser.push(reservations[i]);
         }

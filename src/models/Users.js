@@ -13,14 +13,14 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      lastName:{
-        type:DataTypes.STRING,
+      lastName: {
+        type: DataTypes.STRING,
         allowNull: false
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true, 
+        unique: true,
       },
       password: {
         type: DataTypes.STRING,
@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
         allowNull: true,
         defaultValue: "Usuario",
       },
-      isBanned: { 
+      isBanned: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
         defaultValue: false,
@@ -44,7 +44,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      profileImage:{
+      profileImage: {
         type: DataTypes.STRING,
         allowNull: true,
       }

@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
       allowNull: false,
-      unique: true,
+     
     },
     pushDate: {
         type: DataTypes.DATEONLY,
