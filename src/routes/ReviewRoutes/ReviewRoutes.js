@@ -1,5 +1,5 @@
 const express=require('express')
-const {createReviewHandler, getReviewsHandler, destroyReviewHandler}= require('../../handlers/ReviewHandler/ReviewHandler');
+const {createReviewHandler, getReviewsHandler, destroyReviewHandler, getReviewsUserHandler}= require('../../handlers/ReviewHandler/ReviewHandler');
 const router= express.Router();
 
 router.post('/create', createReviewHandler);
