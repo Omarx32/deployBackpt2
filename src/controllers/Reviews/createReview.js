@@ -90,52 +90,52 @@ const getReviewsHome = async (id) => {
 };
 
 const getReviewsUser = async (UserEmail) => {
-    const reviews = await Reviews.findAll();
-    const properties = await Property.findAll();
-    const user = await Users.findOne({ where: { email: UserEmail } });
-    const userGoogle = await UsersGoogle.findOne({ where: { email: UserEmail } });
-  
-    console.log(user);
-    // console.log(userGoogle);
-  
-    const reviewsUser = [];
-  
-    for(let i = 0; i < reviews.length; i++){
-      if(!reviews[i].dataValues.UserId || !user){continue;}
-      if(reviews[i].dataValues.UserId===user.dataValues.id){
-        reviewsUser.push(reviews[i]);
-      }
+  const reviews = await Reviews.findAll();
+  const properties = await Property.findAll();
+  const user = await Users.findOne({ where: { email: UserEmail } });
+  const userGoogle = await UsersGoogle.findOne({ where: { email: UserEmail } });
+
+  console.log(user);
+  // console.log(userGoogle);
+
+  const reviewsUser = [];
+
+  for(let i = 0; i < reviews.length; i++){
+    if(!reviews[i].dataValues.UserId || !user){continue;}
+    if(reviews[i].dataValues.UserId===user.dataValues.id){
+      reviewsUser.push(reviews[i]);
     }
-    console.log(reviewsUser);
-  
-      if (!reviewsUser.length) {
-        for (let i = 0; i < reviews.length; i++) {
-          if(!reviews[i].dataValues.UsersGoogleId || !userGoogle){continue;}
-          console.log(userGoogle);
-          if (reviews[i].dataValues.UsersGoogleId === userGoogle.dataValues.id) {
-            reviewsUser.push(reviews[i]);
-          }
-        }
-      }
-  
+  }
+  console.log(reviewsUser);
+
     if (!reviewsUser.length) {
-      throw new Error("Error viteh");
-    }
-  
-    for (let i = 0; i < reviewsUser.length; i++) {
-      for (let j = 0; j < properties.length; j++) {
-        if (
-          reviewsUser[i].dataValues.PropertyId ===
-          properties[j].dataValues.id
-        ) {
-          reviewsUser[i].dataValues.PropertyTitle =
-            properties[j].dataValues.title;
+      for (let i = 0; i < reviews.length; i++) {
+        if(!reviews[i].dataValues.UsersGoogleId || !userGoogle){continue;}
+        console.log(userGoogle);
+        if (reviews[i].dataValues.UsersGoogleId === userGoogle.dataValues.id) {
+          reviewsUser.push(reviews[i]);
         }
       }
     }
-    console.log(reviewsUser);
-  
-    return reviewsUser;
-  };
+
+  if (!reviewsUser.length) {
+    throw new Error("Error viteh");
+  }
+
+  for (let i = 0; i < reviewsUser.length; i++) {
+    for (let j = 0; j < properties.length; j++) {
+      if (
+        reviewsUser[i].dataValues.PropertyId ===
+        properties[j].dataValues.id
+      ) {
+        reviewsUser[i].dataValues.PropertyTitle =
+          properties[j].dataValues.title;
+      }
+    }
+  }
+  console.log(reviewsUser);
+
+  return reviewsUser;
+};
 
 module.exports= {createReview, getReviewsHome, getReviewsUser};

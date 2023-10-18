@@ -1,5 +1,6 @@
-const {createReview, getReviewsHome}= require('../../controllers/Reviews/createReview');
+const {createReview, getReviewsHome, getReviewsUser}= require('../../controllers/Reviews/createReview');
 const destroyReview= require('../../controllers/Reviews/destroyReview')
+
 const createReviewHandler= async (req, res)=>{
     try {
         const {description, rating, idHouse, email, password}= req.body;
@@ -31,6 +32,15 @@ const destroyReviewHandler = async (req, res) => {
       res.status(400).json({ message: "Failed to delete", error: error.message });
     }
   };
-  
+  const getReviewsUserHandler = async (req, res) => {
+    try {
+      const { email } = req.query;
+      const response = await getReviewsUser(email);
+      res.status(200).json(response);
+    } catch (error) {
+      console.error(error);
+      res.status(400).json({ error: error.message });
+    }
+}
 
-module.exports={createReviewHandler, getReviewsHandler, destroyReviewHandler}
+module.exports={createReviewHandler, getReviewsHandler, destroyReviewHandler, getReviewsUserHandler}
