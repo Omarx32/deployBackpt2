@@ -1,5 +1,5 @@
 const {createReview, getReviewsHome, getReviewsUser}= require('../../controllers/Reviews/createReview');
-const destroyReview= require('../../controllers/Reviews/destroyReview')
+const destroyReview= require('../../controllers/Reviews/destroyReservation')
 
 const createReviewHandler= async (req, res)=>{
     try {
