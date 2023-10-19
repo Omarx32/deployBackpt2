@@ -15,7 +15,7 @@ async function sendSuccessEmail() {
     // Enviar un correo electrónico de compra exitosa
     const info = await transporter.sendMail({
       from: '"Wander Luxe" <wanderluxe01@gmail.com>',
-      to: "wanderluxe01@gmail.com",
+      to: "miguegorriti@gmail.com",
       subject: "¡Compra exitosa!",
       text: "Su reserva en Wander Luxe ha sido exitosa. ¡Gracias por su compra!",
     });
