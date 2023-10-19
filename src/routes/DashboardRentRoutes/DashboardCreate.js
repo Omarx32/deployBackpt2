@@ -4,7 +4,7 @@ const {
 } = require("../../handlers/DashboardHandler/DashboardHandler");
 const {
   dashboardAllRentsHandler,
-} = require("../../handlers/DashboardAllRentsH/DashboardAllRentsH");
+} = require("../../handlers/DashboardAllRentsH/DashnoardAllRentsH");
 const router = express.Router();
 
 router.get("/statistics/:month", getMonthlyStatistics);
