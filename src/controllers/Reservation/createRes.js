@@ -15,11 +15,17 @@ const createReservation = async (
   if (!month || !numHuespedes || !idHome || !email) {
     throw new Error("Missing required data");
   }
-
+  const reservaciones= await Reservation.findAll();
   const resHome = await Property.findByPk(idHome);
   const price = resHome.dataValues.nightPrice;
   const newRes = { month, price, numHuespedes };
-
+  
+  for(let i = 0; i < reservaciones.length; i++){
+    if(reservaciones[i].dataValues.month===month && reservaciones[i].dataValues.PropertyId===idHome){
+      throw new Error("Esta casa ya está reservada este mes")
+    }
+  }
+  
   const createRes = await Reservation.create(newRes);
 
   await createRes.setProperty(resHome);
