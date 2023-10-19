@@ -19,9 +19,9 @@ async function placeOrder(items) {
       currency_id: "ARS",
     })),
     back_urls: {
-      success: "http://localhost:3001/mp/success",
-      failure: "http://localhost:3001/mp/failure",
-      pending: "http://localhost:3001/mp/pending",
+      success: "https://apibackend-vpxw.onrender.com/mp/success",
+      failure: "https://apibackend-vpxw.onrender.com/mp/failure",
+      pending: "https://apibackend-vpxw.onrender.com/mp/pending",
     },
   };
   console.log("Preference", preference);
