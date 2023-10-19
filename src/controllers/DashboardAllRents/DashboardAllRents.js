@@ -16,7 +16,7 @@ const DashboardAllRents = async () => {
     reservations.forEach((reservation) => {
       const month = reservation.month;
       const price = reservation.price;
-      const userId = reservation.User.id; 
+      const userId = reservation.User ? reservation.User.id : null; 
 
       if (!monthlyStatistics[month]) {
         monthlyStatistics[month] = {
@@ -27,9 +27,11 @@ const DashboardAllRents = async () => {
         };
       }
 
-      monthlyStatistics[month].numberOfReservations += 1;
-      monthlyStatistics[month].totalReservationPrice += price;
-      monthlyStatistics[month].userIds.push(userId); 
+      if (userId) {
+        monthlyStatistics[month].numberOfReservations += 1;
+        monthlyStatistics[month].totalReservationPrice += price;
+        monthlyStatistics[month].userIds.push(userId); 
+      }
     });
 
     const statisticsArray = Object.values(monthlyStatistics);
